@@ -1,21 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Dependency_Injection
+﻿namespace Dependency_Injection
 {
     public static class AppDependencies
     {
-        // Create and wire up all dependencies here
-        public static OrderService CreateOrderService()
+        public static ServiceProvider BuildContainer()
         {
-            ILogger logger = new ConsoleLogger();
-            INotificationService notification = new EmailNotification();
+            var container = new ServiceProvider();
 
-          return new OrderService(notification, logger);
+            container.Register<ILogger>(_ => new ConsoleLogger(), ServiceLifetime.Singleton);
+
+            container.Register<INotificationService>(_ => new EmailNotification(), ServiceLifetime.Transient);
+            container.Register<INotificationService>(_ => new EmailNotification(), ServiceLifetime.Scoped);
+
+            container.Register<OrderService>(sp =>
+                new OrderService(sp.Get<INotificationService>(), sp.Get<ILogger>()),
+                ServiceLifetime.Scoped);
+
+            return container;
         }
     }
+
 }
 

@@ -12,11 +12,4 @@ namespace Dependency_Injection
             => Console.WriteLine($"Email Sent: {message}");
     }
 
-    //public class EmailNotification
-    //{
-    //    public void Send()
-    //    {
-    //        Console.WriteLine("Email Notification Sent");
-    //    }
-    //}
 }
