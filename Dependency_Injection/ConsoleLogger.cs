@@ -1,9 +1,11 @@
 ﻿namespace Dependency_Injection
 {
-    public class ConsoleLogger : ILogger
+    public class ConsoleLogger : TracedDisposable, ILogger
     {
-        public void Log(string message)
-            => Console.WriteLine($"[LOG] {message}");
+        protected override string TypeName => "ILogger(ConsoleLogger)";
+        public ConsoleLogger(ITracer tracer) : base(tracer) { }
+
+        public void Log(string message) => TraceUse(message);
     }
 
 }
