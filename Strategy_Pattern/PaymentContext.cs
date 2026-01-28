@@ -11,10 +11,12 @@ namespace Strategy_Pattern
     public class PaymentContext
     {
         private IPaymentStrategy _paymentStrategy;
+        private IWorkflowStrategy _workflowStrategy;
 
-        public PaymentContext(IPaymentStrategy paymentStrategy)
+        public PaymentContext(IPaymentStrategy paymentStrategy, IWorkflowStrategy workflowStrategy)
         {
             _paymentStrategy = paymentStrategy;
+            _workflowStrategy = workflowStrategy;
         }
 
         public void ChangeStrategy(IPaymentStrategy paymentStrategy)
@@ -25,6 +27,13 @@ namespace Strategy_Pattern
         public void ExecutePayment(decimal amount)
         {
             _paymentStrategy.Pay(amount);
+           // _workflowStrategy.
+
+        }
+        public void WorkFlowchange(IWorkflowStrategy workflow)
+        {
+            _workflowStrategy= workflow;
+
         }
     }
 

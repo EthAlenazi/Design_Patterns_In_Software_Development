@@ -4,7 +4,7 @@
     {
         static void Main()
         {
-            PaymentContext payment = new PaymentContext(new CreditCardPayment());
+            PaymentContext payment = new PaymentContext(new CreditCardPayment(),new WorkFlow1());
 
             payment.ExecutePayment(100);
 

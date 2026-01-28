@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace Strategy_Pattern
 {
-    //Strategy Interface
-    public interface IPaymentStrategy
+    public class WorkFlow1 : IWorkflowStrategy
     {
-        void Pay(decimal amount);
-
+        public void changeWorkFlow()
+        {
+            Console.WriteLine("test work 1 ");
+        }
     }
 }
